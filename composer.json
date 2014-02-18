@@ -1,5 +1,5 @@
 {
-    "name": "rjmetrics/php-swf",
+    "name": "rjmetrics/swf-php",
     "description": "A wrapper library around the AWS SWF event history",
     "authors": [
         {
