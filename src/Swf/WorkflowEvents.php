@@ -28,6 +28,8 @@ class WorkflowEvents {
 				return new Event\ActivityCompleted($json);
 			case 'ActivityTaskFailed':
 				return new Event\ActivityFailed($json);
+			case 'ActivityTaskTimedOut':
+				return new Event\ActivityTimedOut($json);
 			default:
 				return new Event\Base($json);
 		}
@@ -75,6 +77,14 @@ class WorkflowEvents {
 
 	public function getAllActivityCompletedEvents() {
 		return $this->getAllByType('ActivityTaskCompleted');
+	}
+
+	public function getAllActivityFailedEvents() {
+		return $this->getAllByType('ActivityTaskFailed');
+	}
+
+	public function getAllActivityTimedOutEvents() {
+		return $this->getAllByType('ActivityTaskTimedOut');
 	}
 
 }
