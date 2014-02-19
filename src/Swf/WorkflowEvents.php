@@ -89,7 +89,7 @@ class WorkflowEvents {
 		return $this->getAllByType('ActivityTaskStarted');
 	}
 
-	public function getAllActivityStopperEvents() {
+	public function getAllActivityStoppedEvents() {
 		return $this->getAllByTypeArray([
 			'ActivityTaskCompleted',
 			'ActivityTaskFailed',

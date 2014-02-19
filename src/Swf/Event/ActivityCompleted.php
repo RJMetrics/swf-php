@@ -2,7 +2,7 @@
 
 namespace Swf\Event;
 
-class ActivityCompleted extends Base implements StopperEvent {
+class ActivityCompleted extends ActivityStopped {
 
 	private $scheduledEventId;
 	private $startedEventId;
