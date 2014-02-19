@@ -85,8 +85,8 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function getWorkflowCompletedEvent() {
-		$this->assertEquals(11, $this->history->getWorkflowCompletedEvent()->getId());
+	public function getWorkflowStopperEvent() {
+		$this->assertEquals(11, $this->history->getWorkflowStopperEvent()->getId());
 	}
 
 	/**
@@ -101,8 +101,8 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function getAllActivityCompletedEvents() {
-		$events = $this->history->getAllActivityCompletedEvents();
+	public function getAllActivityStopperEvents() {
+		$events = $this->history->getAllActivityStopperEvents();
 		$this->assertEquals(1, count($events));
 		$this->assertEquals('Swf\Event\ActivityCompleted', get_class($events[0]));
 	}

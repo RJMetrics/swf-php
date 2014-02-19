@@ -6,6 +6,19 @@ class WorkflowEvents {
 
 	private $events;
 
+	private static $eventClasses = [
+		'WorkflowExecutionStarted' => 'Swf\Event\WorkflowStarted',
+		'WorkflowExecutionCompleted' => 'Swf\Event\WorkflowCompleted',
+		'WorkflowExecutionFailed' => 'Swf\Event\WorkflowFailed',
+		'WorkflowExecutionTimedOut' => 'Swf\Event\WorkflowTimedOut',
+		'WorkflowExecutionTerminated' => 'Swf\Event\WorkflowTerminated',
+		'ActivityTaskScheduled' => 'Swf\Event\ActivityScheduled',
+		'ActivityTaskStarted' => 'Swf\Event\ActivityStarted',
+		'ActivityTaskCompleted' => 'Swf\Event\ActivityCompleted',
+		'ActivityTaskFailed' => 'Swf\Event\ActivityFailed',
+		'ActivityTaskTimedOut' => 'Swf\Event\ActivityTimedOut',
+	];
+
 	public function __construct(array $eventsJson) {
 		$this->events = self::createEvents($eventsJson);
 	}
@@ -15,23 +28,12 @@ class WorkflowEvents {
 	}
 
 	private static function createEvent(array $json) {
-		switch($json['eventType']) {
-			case 'WorkflowExecutionStarted':
-				return new Event\WorkflowStarted($json);
-			case 'WorkflowExecutionCompleted':
-				return new Event\WorkflowCompleted($json);
-			case 'ActivityTaskScheduled':
-				return new Event\ActivityScheduled($json);
-			case 'ActivityTaskStarted':
-				return new Event\ActivityStarted($json);
-			case 'ActivityTaskCompleted':
-				return new Event\ActivityCompleted($json);
-			case 'ActivityTaskFailed':
-				return new Event\ActivityFailed($json);
-			case 'ActivityTaskTimedOut':
-				return new Event\ActivityTimedOut($json);
-			default:
-				return new Event\Base($json);
+		if(array_key_exists($json['eventType'], self::$eventClasses)) {
+			$class = self::$eventClasses[$json['eventType']];
+			return new $class($json);
+		}
+		else {
+			return new Event\Base($json);
 		}
 	}
 
@@ -61,13 +63,25 @@ class WorkflowEvents {
 			});
 	}
 
+	private function getAllByTypeArray(array $types) {
+		return $this->filterEvents(
+			function($event) use ($types) {
+				return in_array($event->getType(), $types);
+			});
+	}
+
 	public function getWorkflowStartedEvent() {
 		$options = $this->getAllByType('WorkflowExecutionStarted');
 		return $this->getFirst($options);
 	}
 
-	public function getWorkflowCompletedEvent() {
-		$options = $this->getAllByType('WorkflowExecutionCompleted');
+	public function getWorkflowStopperEvent() {
+		$options = $this->getAllByTypeArray([
+			'WorkflowExecutionCompleted',
+			'WorkflowExecutionFailed',
+			'WorkflowExecutionTimedOut',
+			'WorkflowExecutionTerminated',
+		]);
 		return $this->getFirst($options);
 	}
 
@@ -75,16 +89,12 @@ class WorkflowEvents {
 		return $this->getAllByType('ActivityTaskStarted');
 	}
 
-	public function getAllActivityCompletedEvents() {
-		return $this->getAllByType('ActivityTaskCompleted');
-	}
-
-	public function getAllActivityFailedEvents() {
-		return $this->getAllByType('ActivityTaskFailed');
-	}
-
-	public function getAllActivityTimedOutEvents() {
-		return $this->getAllByType('ActivityTaskTimedOut');
+	public function getAllActivityStopperEvents() {
+		return $this->getAllByTypeArray([
+			'ActivityTaskCompleted',
+			'ActivityTaskFailed',
+			'ActivityTaskTimedOut',
+		]);
 	}
 
 }

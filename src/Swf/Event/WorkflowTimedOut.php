@@ -2,18 +2,18 @@
 
 namespace Swf\Event;
 
-class WorkflowCompleted extends Base implements StopperEvent {
+class WorkflowTimedOut extends Base implements StopperEvent {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
 	}
 
 	public function wasSuccessful() {
-		return true;
+		return false;
 	}
 
 	public function getErrorMessage() {
-		return null;
+		return 'Timeout';
 	}
 
 }

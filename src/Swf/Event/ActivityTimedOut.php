@@ -2,7 +2,7 @@
 
 namespace Swf\Event;
 
-class ActivityTimedOut extends Base {
+class ActivityTimedOut extends Base implements StopperEvent {
 
 	private $scheduledEventId;
 	private $startedEventId;
@@ -20,6 +20,14 @@ class ActivityTimedOut extends Base {
 
 	public function getStartedEventId() {
 		return $this->startedEventId;
+	}
+
+	public function wasSuccessful() {
+		return false;
+	}
+
+	public function getErrorMessage() {
+		return 'Timeout';
 	}
 
 }

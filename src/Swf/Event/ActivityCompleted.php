@@ -2,7 +2,7 @@
 
 namespace Swf\Event;
 
-class ActivityCompleted extends Base {
+class ActivityCompleted extends Base implements StopperEvent {
 
 	private $scheduledEventId;
 	private $startedEventId;
@@ -20,6 +20,14 @@ class ActivityCompleted extends Base {
 
 	public function getStartedEventId() {
 		return $this->startedEventId;
+	}
+
+	public function wasSuccessful() {
+		return true;
+	}
+
+	public function getErrorMessage() {
+		return null;
 	}
 
 }
