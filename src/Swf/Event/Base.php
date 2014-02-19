@@ -34,7 +34,8 @@ class Base {
 		if(isset($json[$key])) {
 			return $json[$key];
 		}
-		throw new \Swf\Exception\MalformedJsonException();
+		throw new \Swf\Exception\MalformedJsonException(
+			"Key $key not found in " . json_encode($json));
 	}
 
 }
