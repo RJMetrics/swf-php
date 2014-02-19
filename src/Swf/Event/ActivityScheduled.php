@@ -8,8 +8,8 @@ class ActivityScheduled extends Base {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
-		$attrs = $json['activityTaskScheduledEventAttributes'];
-		$this->activityName = $attrs['activityType']['name'];
+		$attrs = self::jsonGet($json, 'activityTaskScheduledEventAttributes');
+		$this->activityName = self::jsonGet(self::jsonGet($attrs, 'activityType'), 'name');
 	}
 
 	public function getActivityName() {

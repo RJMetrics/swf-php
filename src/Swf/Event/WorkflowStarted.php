@@ -8,8 +8,8 @@ class WorkflowStarted extends Base {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
-		$attrs = $json['workflowExecutionStartedEventAttributes'];
-		$this->workflowName = $attrs['workflowType']['name'];
+		$attrs = self::jsonGet($json, 'workflowExecutionStartedEventAttributes');
+		$this->workflowName = self::jsonGet(self::jsonGet($attrs, 'workflowType'), 'name');
 	}
 
 	public function getWorkflowName() {

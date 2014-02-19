@@ -9,9 +9,9 @@ class ActivityTimedOut extends ActivityStopped {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
-		$attrs = $json['activityTaskTimedOutEventAttributes'];
-		$this->scheduledEventId = $attrs['scheduledEventId'];
-		$this->startedEventId = $attrs['startedEventId'];
+		$attrs = self::jsonGet($json, 'activityTaskTimedOutEventAttributes');
+		$this->scheduledEventId = self::jsonGet($attrs, 'scheduledEventId');
+		$this->startedEventId = self::jsonGet($attrs, 'startedEventId');
 	}
 
 	public function getScheduledEventId() {

@@ -8,8 +8,8 @@ class WorkflowTerminated extends WorkflowStopped {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
-		$attrs = $json['workflowExecutionTerminatedEventAttributes'];
-		$this->reason = $attrs['reason'];
+		$attrs = self::jsonGet($json, 'workflowExecutionTerminatedEventAttributes');
+		$this->reason = self::jsonGet($attrs, 'reason');
 	}
 
 	public function wasSuccessful() {

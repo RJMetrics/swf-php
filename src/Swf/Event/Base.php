@@ -9,9 +9,9 @@ class Base {
 	private $timestamp;
 
 	public function __construct(array $json) {
-		$this->id = $json['eventId'];
-		$this->type = $json['eventType'];
-		$this->timestamp = $json['eventTimestamp'];
+		$this->id = self::jsonGet($json, 'eventId');
+		$this->type = self::jsonGet($json, 'eventType');
+		$this->timestamp = self::jsonGet($json, 'eventTimestamp');
 	}
 
 	public function getId() {
@@ -28,6 +28,13 @@ class Base {
 
 	public function getDateString() {
 		return date('Y-m-d H:i:s', $this->getTimestamp());
+	}
+
+	protected static function jsonGet($json, $key) {
+		if(isset($json[$key])) {
+			return $json[$key];
+		}
+		throw new \Swf\Exception\MalformedJsonException();
 	}
 
 }

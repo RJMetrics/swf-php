@@ -71,7 +71,7 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function getEventById_exception() {
-		$this->setExpectedException('\Swf\NotFoundException');
+		$this->setExpectedException('\Swf\Exception\NotFoundException');
 		$this->history->getEventById(999);
 	}
 

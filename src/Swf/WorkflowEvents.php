@@ -43,7 +43,7 @@ class WorkflowEvents {
 
 	private function getFirst(array $options) {
 		if(count($options) === 0) {
-			throw new NotFoundException();
+			throw new Exception\NotFoundException();
 		}
 		return array_shift($options);
 	}

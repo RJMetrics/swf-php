@@ -11,8 +11,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Swf\\": "src/Swf/",
-            "Swf\\Event\\": "src/Swf/Event"
+            "Swf\\": "src/Swf/"
         }
     }
 }
