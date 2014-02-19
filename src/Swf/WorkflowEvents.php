@@ -75,7 +75,7 @@ class WorkflowEvents {
 		return $this->getFirst($options);
 	}
 
-	public function getWorkflowStopperEvent() {
+	public function getWorkflowStoppedEvent() {
 		$options = $this->getAllByTypeArray([
 			'WorkflowExecutionCompleted',
 			'WorkflowExecutionFailed',

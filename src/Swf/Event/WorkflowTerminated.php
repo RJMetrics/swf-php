@@ -2,7 +2,7 @@
 
 namespace Swf\Event;
 
-class WorkflowTerminated extends Base implements StopperEvent {
+class WorkflowTerminated extends WorkflowStopped {
 
 	private $reason;
 

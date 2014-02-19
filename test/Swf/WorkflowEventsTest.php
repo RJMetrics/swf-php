@@ -85,8 +85,8 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
-	public function getWorkflowStopperEvent() {
-		$this->assertEquals(11, $this->history->getWorkflowStopperEvent()->getId());
+	public function getWorkflowStoppedEvent() {
+		$this->assertEquals(11, $this->history->getWorkflowStoppedEvent()->getId());
 	}
 
 	/**

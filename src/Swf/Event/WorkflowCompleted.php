@@ -2,7 +2,7 @@
 
 namespace Swf\Event;
 
-class WorkflowCompleted extends Base implements StopperEvent {
+class WorkflowCompleted extends WorkflowStopped {
 
 	public function __construct(array $json) {
 		parent::__construct($json);
