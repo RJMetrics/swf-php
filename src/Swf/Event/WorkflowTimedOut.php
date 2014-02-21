@@ -16,6 +16,10 @@ class WorkflowTimedOut extends WorkflowStopped {
 		return 'Timeout';
 	}
 
+	public function getErrorDetails() {
+		return null;
+	}
+
 }
 
 ?>

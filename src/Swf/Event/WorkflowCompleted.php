@@ -16,6 +16,10 @@ class WorkflowCompleted extends WorkflowStopped {
 		return null;
 	}
 
+	public function getErrorDetails() {
+		return null;
+	}
+
 }
 
 ?>

@@ -24,7 +24,7 @@ class WorkflowEvents {
 	}
 
 	private static function createEvents(array $events) {
-		return array_map([self, 'createEvent'], $events);
+		return array_map(['Swf\WorkflowEvents', 'createEvent'], $events);
 	}
 
 	private static function createEvent(array $json) {
