@@ -35,7 +35,7 @@ class Base {
 			return $json[$key];
 		}
 		throw new \Swf\Exception\MalformedJsonException(
-			"Key $key not found in " . json_encode($json));
+			"'$key' not found in '" . json_encode($json) . "'");
 	}
 
 }

@@ -9,7 +9,7 @@ class WorkflowCompleted extends WorkflowStopped {
 	public function __construct(array $json) {
 		parent::__construct($json);
 		$attrs = self::jsonGet($json, 'workflowExecutionCompletedEventAttributes');
-		$this->result = self::jsonGet($attrs, 'result');
+		$this->result = isset($attrs['result']) ? $attrs['result'] : null;
 	}
 
 	public function wasSuccessful() {
