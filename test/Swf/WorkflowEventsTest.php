@@ -51,7 +51,10 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	{
 		"eventId":11,
 		"eventTimestamp":1391635189.117,
-		"eventType":"WorkflowExecutionCompleted"
+		"eventType":"WorkflowExecutionCompleted",
+		"workflowExecutionCompletedEventAttributes": {
+			"result": "myresult"
+		}
 	}
 ]', true);
 		$this->rawEvents = $testEvents;
