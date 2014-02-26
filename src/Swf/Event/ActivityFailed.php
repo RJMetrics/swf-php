@@ -13,7 +13,7 @@ class ActivityFailed extends ActivityStopped {
 		$attrs = self::jsonGet($json, 'activityTaskFailedEventAttributes');
 		$this->scheduledEventId = self::jsonGet($attrs, 'scheduledEventId');
 		$this->startedEventId = self::jsonGet($attrs, 'startedEventId');
-		$this->reason = self::jsonGet($attrs, 'reason');
+		$this->reason = self::jsonGetOrDefault($attrs, 'reason', null);
 	}
 
 	public function getScheduledEventId() {

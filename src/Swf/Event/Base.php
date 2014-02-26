@@ -38,6 +38,10 @@ class Base {
 			"'$key' not found in '" . json_encode($json) . "'");
 	}
 
+	protected static function jsonGetOrDefault($json, $key, $default) {
+		return isset($json[$key]) ? $json[$key] : $default;
+	}
+
 }
 
 ?>

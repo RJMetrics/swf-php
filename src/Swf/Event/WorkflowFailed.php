@@ -10,8 +10,8 @@ class WorkflowFailed extends WorkflowStopped {
 	public function __construct(array $json) {
 		parent::__construct($json);
 		$attrs = self::jsonGet($json, 'workflowExecutionFailedEventAttributes');
-		$this->reason = self::jsonGet($attrs, 'reason');
-		$this->details = self::jsonGet($attrs, 'details');
+		$this->reason = self::jsonGetOrDefault($attrs, 'reason', null);
+		$this->details = self::jsonGetOrDefault($attrs, 'details', null);
 	}
 
 	public function wasSuccessful() {
