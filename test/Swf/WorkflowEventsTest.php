@@ -58,8 +58,8 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	}
 ]', true);
 		$this->rawEvents = $testEvents;
-		$this->history = new \Swf\WorkflowEvents($testEvents, "workflowId_33");
-		$this->emptyHistory = new \Swf\WorkflowEvents(json_decode('[]',true), "workflowId_77");
+		$this->history = new \Swf\WorkflowEvents("workflowId_33", $testEvents);
+		$this->emptyHistory = new \Swf\WorkflowEvents("workflowId_77", json_decode('[]',true));
 	}
 
 	/**
@@ -139,8 +139,8 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	 * @test
 	 */
 	public function getLastEvent_onEmpty() {
+		$this->setExpectedException('\Swf\Exception\NotFoundException');
 		$retVal = $this->emptyHistory->getLastEvent();
-		$this->assertEquals(null, $retVal);
 	}
 
 }
