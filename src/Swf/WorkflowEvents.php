@@ -4,6 +4,7 @@ namespace Swf;
 
 class WorkflowEvents {
 
+	private $workflowId;
 	private $events;
 
 	private static $eventClasses = [
@@ -19,7 +20,8 @@ class WorkflowEvents {
 		'ActivityTaskTimedOut' => 'Swf\Event\ActivityTimedOut',
 	];
 
-	public function __construct(array $eventsJson) {
+	public function __construct($workflowId, array $eventsJson) {
+		$this->workflowId = $workflowId;
 		$this->events = self::createEvents($eventsJson);
 	}
 
@@ -70,6 +72,10 @@ class WorkflowEvents {
 			});
 	}
 
+	public function getWorkflowId() {
+		return $this->workflowId;
+	}
+
 	public function getWorkflowStartedEvent() {
 		$options = $this->getAllByType('WorkflowExecutionStarted');
 		return $this->getFirst($options);
@@ -95,6 +101,20 @@ class WorkflowEvents {
 			'ActivityTaskFailed',
 			'ActivityTaskTimedOut',
 		]);
+	}
+
+	public function getLastEvent() {
+		if(count($this->events) === 0) {
+			throw new Exception\NotFoundException("No events exist in the target WorkflowEvents");
+		}
+		
+		$retEvent = $this->events[0];
+		foreach($this->events as $event) {
+			if ($retEvent->getId() < $event->getId()) {
+				$retEvent = $event;
+			}
+		}
+		return $retEvent;
 	}
 
 }
