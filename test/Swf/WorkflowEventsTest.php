@@ -58,7 +58,7 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	}
 ]', true);
 		$this->rawEvents = $testEvents;
-		$this->history = new \Swf\WorkflowEvents($testEvents);
+		$this->history = new \Swf\WorkflowEvents($testEvents, 33);
 	}
 
 	/**
@@ -108,6 +108,22 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 		$events = $this->history->getAllActivityStoppedEvents();
 		$this->assertEquals(1, count($events));
 		$this->assertEquals('Swf\Event\ActivityCompleted', get_class($events[0]));
+	}
+
+	/**
+	 * @test
+	 */
+	public function getWorkflowId() {
+		$retVal = $this->history->getWorkflowId();
+		$this->assertEquals(33, $retVal);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLastEvent() {
+		$retVal = $this->history->getLastEvent();
+		$this->assertEquals(11, $retVal->getId());
 	}
 
 }
