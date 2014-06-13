@@ -110,7 +110,7 @@ class WorkflowEvents {
 		
 		$retEvent = null;
 		$maxId = null;
-		foreach($this->events as &$event) {
+		foreach($this->events as $event) {
 			if ($maxId < $event->getId()) {
 				$retEvent = $event;
 				$maxId = $retEvent->getId();
