@@ -108,12 +108,10 @@ class WorkflowEvents {
 			throw new Exception\NotFoundException("No events exist in the target WorkflowEvents");
 		}
 		
-		$retEvent = null;
-		$maxId = null;
+		$retEvent = $this->events[0];
 		foreach($this->events as $event) {
-			if ($maxId < $event->getId()) {
+			if ($retEvent->getId() < $event->getId()) {
 				$retEvent = $event;
-				$maxId = $retEvent->getId();
 			}
 		}
 		return $retEvent;
