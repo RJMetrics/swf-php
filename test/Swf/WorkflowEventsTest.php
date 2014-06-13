@@ -59,7 +59,7 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 ]', true);
 		$this->rawEvents = $testEvents;
 		$this->history = new \Swf\WorkflowEvents("workflowId_33", $testEvents);
-		$this->emptyHistory = new \Swf\WorkflowEvents("workflowId_77", json_decode('[]',true));
+		$this->emptyHistory = new \Swf\WorkflowEvents("workflowId_77", []);
 	}
 
 	/**
