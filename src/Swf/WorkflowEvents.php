@@ -104,7 +104,7 @@ class WorkflowEvents {
 	}
 
 	public function getLastEvent() {
-		$retEvent = [];
+		$retEvent = null;
 		$maxId = null;
 		foreach($this->events as &$event) {
 			if ($maxId < $event->getId()) {
