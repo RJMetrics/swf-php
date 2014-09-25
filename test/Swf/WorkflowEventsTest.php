@@ -96,6 +96,15 @@ class WorkflowEventsTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
+	public function getAllActivityScheduledEvents() {
+		$events = $this->history->getAllActivityScheduledEvents();
+		$this->assertEquals(1, count($events));
+		$this->assertEquals('Swf\Event\ActivityScheduled', get_class($events[0]));
+	}
+
+	/**
+	 * @test
+	 */
 	public function getAllActivityStartedEvents() {
 		$events = $this->history->getAllActivityStartedEvents();
 		$this->assertEquals(1, count($events));
