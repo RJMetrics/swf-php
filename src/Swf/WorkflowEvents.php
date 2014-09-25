@@ -91,6 +91,10 @@ class WorkflowEvents {
 		return $this->getFirst($options);
 	}
 
+	public function getAllActivityScheduledEvents() {
+		return $this->getAllByType('ActivityTaskScheduled');
+	}
+
 	public function getAllActivityStartedEvents() {
 		return $this->getAllByType('ActivityTaskStarted');
 	}
