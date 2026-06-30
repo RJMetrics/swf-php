@@ -27,7 +27,11 @@ class Base {
 	}
 
 	public function getDateString() {
-		return date('Y-m-d H:i:s', $this->getTimestamp());
+		$ts = $this->getTimestamp();
+		if ($ts instanceof \DateTime) {
+			return $ts->format('Y-m-d H:i:s');
+		}
+		return date('Y-m-d H:i:s', $ts);
 	}
 
 	protected static function jsonGet($json, $key) {
