@@ -21,6 +21,20 @@ class BaseTest extends PHPUnit_Framework_TestCase {
 	/**
 	 * @test
 	 */
+	public function successWithDateTimeTimestamp() {
+		$dateTime = new \DateTime('2014-02-18 14:40:00', new \DateTimeZone('UTC'));
+		$json = [
+			'eventId' => 1,
+			'eventType' => 'ActivityTaskStarted',
+			'eventTimestamp' => $dateTime,
+		];
+		$event = new \Swf\Event\Base($json);
+		$this->assertEquals('2014-02-18 14:40:00', $event->getDateString());
+	}
+
+	/**
+	 * @test
+	 */
 	public function malformed() {
 		$json = [
 			'noEventId' => 2,
